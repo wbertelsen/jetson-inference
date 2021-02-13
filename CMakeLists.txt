@@ -1,6 +1,7 @@
 
 cmake_minimum_required(VERSION 2.8)
 project(jetson-inference)
+link_directories(/home/willb/code/TensorRT-7.2.2.3/lib)
 
 # submodule warning
 message(" ")
@@ -64,12 +65,12 @@ set(
 )
 
 if(CUDA_VERSION_MAJOR GREATER 9)
-	message("-- CUDA ${CUDA_VERSION_MAJOR} detected, enabling SM_72")
+	message("-- CUDA ${CUDA_VERSION_MAJOR} detected, enabling SM_86")
 
 	set(
 		CUDA_NVCC_FLAGS
 		${CUDA_NVCC_FLAGS}; 
-		-gencode arch=compute_72,code=sm_72
+		-gencode arch=compute_86,code=sm_86
 	)
 endif()
 
@@ -128,8 +129,9 @@ else()
 endif()
 	
 cuda_add_library(jetson-inference SHARED ${inferenceSources} ${pluginSources})
+# cuda_add_library(tensorrt SHARED /home/willb/code/TensorRT-7.2.2.3/lib)
 
-
+cmake_policy(SET CMP0079 NEW)
 # transfer all headers to the include directory
 file(MAKE_DIRECTORY ${PROJECT_INCLUDE_DIR}/jetson-inference)
 

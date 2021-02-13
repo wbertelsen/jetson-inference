@@ -5,7 +5,7 @@
 #
 # If you want to support another version of Python, add it here.
 #
-set(PYTHON_BINDING_VERSIONS 2.7 3.6 3.7)
+set(PYTHON_BINDING_VERSIONS 2.7 3.6 3.7 3.8)
 
 message("-- trying to build Python bindings for Python versions:  ${PYTHON_BINDING_VERSIONS}")
 
